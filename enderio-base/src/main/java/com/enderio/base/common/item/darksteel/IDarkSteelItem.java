@@ -3,13 +3,13 @@ package com.enderio.base.common.item.darksteel;
 import com.enderio.base.client.renderer.item.IItemOverlayRender;
 import com.enderio.base.client.renderer.item.ItemBarRenderer;
 import com.enderio.base.client.tooltip.IAdvancedTooltipProvider;
-import com.enderio.base.common.init.EIOCapabilities;
 import com.enderio.base.common.capability.IMultiCapabilityItem;
 import com.enderio.base.common.capability.INamedNBTSerializable;
 import com.enderio.base.common.capability.MultiCapabilityProvider;
 import com.enderio.base.common.capability.darksteel.DarkSteelUpgradeable;
 import com.enderio.base.common.capability.darksteel.EnergyDelegator;
 import com.enderio.base.common.capability.darksteel.IDarkSteelUpgrade;
+import com.enderio.base.common.init.EIOCapabilities;
 import com.enderio.base.common.item.darksteel.upgrades.EmpoweredUpgrade;
 import com.enderio.base.common.lang.EIOLang;
 import com.enderio.base.common.util.EnergyUtil;
@@ -35,6 +35,7 @@ public interface IDarkSteelItem extends IMultiCapabilityItem, IAdvancedTooltipPr
         return DarkSteelUpgradeable.getUpgradeAs(stack, EmpoweredUpgrade.NAME, EmpoweredUpgrade.class);
     }
 
+    @Override
     default MultiCapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundTag nbt, MultiCapabilityProvider provider) {
         return initDarkSteelCapabilities(provider, Objects.requireNonNull(stack.getItem().getRegistryName()));
     }
@@ -85,8 +86,10 @@ public interface IDarkSteelItem extends IMultiCapabilityItem, IAdvancedTooltipPr
     }
 
     default void addDurabilityTooltips(ItemStack itemStack,  List<Component> tooltips) {
-        String durability = (itemStack.getMaxDamage() - itemStack.getDamageValue()) + "/" + itemStack.getMaxDamage();
-        tooltips.add(TooltipUtil.withArgs(EIOLang.DURABILITY_AMOUNT, durability).withStyle(ChatFormatting.GRAY));
+        if (itemStack.isDamageableItem()) {
+            String durability = (itemStack.getMaxDamage() - itemStack.getDamageValue()) + "/" + itemStack.getMaxDamage();
+            tooltips.add(TooltipUtil.withArgs(EIOLang.DURABILITY_AMOUNT, durability).withStyle(ChatFormatting.GRAY));
+        }
         if (DarkSteelUpgradeable.hasUpgrade(itemStack, EmpoweredUpgrade.NAME)) {
             String energy =  String.format("%,d",EnergyUtil.getEnergyStored(itemStack)) + "/" +  String.format("%,d",EnergyUtil.getMaxEnergyStored(itemStack));
             tooltips.add(TooltipUtil.withArgs(EIOLang.ENERGY_AMOUNT, energy).withStyle(ChatFormatting.GRAY));
