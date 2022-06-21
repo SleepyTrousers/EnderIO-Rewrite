@@ -14,6 +14,7 @@ import com.enderio.machines.data.model.block.MachineModelUtil;
 import com.mojang.math.Vector3f;
 import com.tterrag.registrate.Registrate;
 import com.tterrag.registrate.util.entry.BlockEntry;
+
 import net.minecraft.client.renderer.RenderType;
 
 public class MachineBlocks {
@@ -111,6 +112,25 @@ public class MachineBlocks {
         .model(MachineModelUtil::enhancedMachineBlockItem)
         .build()
         .register();
+    
+    
+    public static final BlockEntry<MachineBlock> VACUUM_CHEST = REGISTRATE
+            .block("vacuum_chest", p -> new MachineBlock(p, MachineBlockEntities.VACUUM_CHEST))
+            .properties(props -> props.strength(2.5f, 8))
+            .loot(MachinesLootTable::copyNBT)
+            .item()
+            .tab(() -> EIOCreativeTabs.MACHINES)
+            .build()
+            .register();
+    
+    public static final BlockEntry<MachineBlock> XP_VACUUM = REGISTRATE
+            .block("xp_vacuum", p -> new MachineBlock(p, MachineBlockEntities.XP_VACUUM))
+            .properties(props -> props.strength(2.5f, 8))
+            .loot(MachinesLootTable::copyNBT)
+            .item()
+            .tab(() -> EIOCreativeTabs.MACHINES)
+            .build()
+            .register();
 
     public static BlockEntry<MachineBlock> CREATIVE_POWER = REGISTRATE
         .block("creative_power", props -> new MachineBlock(props, MachineBlockEntities.CREATIVE_POWER))
