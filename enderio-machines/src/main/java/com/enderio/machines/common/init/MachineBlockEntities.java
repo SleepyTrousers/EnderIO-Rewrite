@@ -1,7 +1,14 @@
 package com.enderio.machines.common.init;
 
 import com.enderio.machines.EIOMachines;
-import com.enderio.machines.common.blockentity.*;
+import com.enderio.machines.common.blockentity.AlloySmelterBlockEntity;
+import com.enderio.machines.common.blockentity.CreativePowerBlockEntity;
+import com.enderio.machines.common.blockentity.EnchanterBlockEntity;
+import com.enderio.machines.common.blockentity.FluidTankBlockEntity;
+import com.enderio.machines.common.blockentity.ImpulseHopperBlockEntity;
+import com.enderio.machines.common.blockentity.SagMillBlockEntity;
+import com.enderio.machines.common.blockentity.SlicerBlockEntity;
+import com.enderio.machines.common.blockentity.StirlingGeneratorBlockEntity;
 import com.tterrag.registrate.Registrate;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
 
@@ -42,6 +49,11 @@ public class MachineBlockEntities {
         .blockEntity("enhanced_alloy_smelter", AlloySmelterBlockEntity.Enhanced::new)
         .validBlocks(MachineBlocks.ENHANCED_ALLOY_SMELTER)
         .register();
+    
+    public static final BlockEntityEntry<ImpulseHopperBlockEntity> IMPULSE_HOPPER = REGISTRATE
+            .blockEntity("impulse_hopper", ImpulseHopperBlockEntity::new)
+            .validBlocks(MachineBlocks.IMPULSE_HOPPER)
+            .register();
 
     public static final BlockEntityEntry<CreativePowerBlockEntity> CREATIVE_POWER = REGISTRATE
         .blockEntity("creative_power", CreativePowerBlockEntity::new)

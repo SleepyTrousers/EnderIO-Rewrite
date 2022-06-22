@@ -14,6 +14,7 @@ import com.enderio.machines.data.model.block.MachineModelUtil;
 import com.mojang.math.Vector3f;
 import com.tterrag.registrate.Registrate;
 import com.tterrag.registrate.util.entry.BlockEntry;
+
 import net.minecraft.client.renderer.RenderType;
 
 public class MachineBlocks {
@@ -179,6 +180,15 @@ public class MachineBlocks {
         .loot(MachinesLootTable::copyNBT)
         .addLayer(() -> RenderType::cutout)
         .blockstate(MachineModelUtil::soulMachineBlock)
+        .item()
+        .tab(() -> EIOCreativeTabs.MACHINES)
+        .build()
+        .register();
+    
+    public static BlockEntry<ProgressMachineBlock> IMPULSE_HOPPER = REGISTRATE
+        .block("impulse_hopper", props -> new ProgressMachineBlock(props, MachineBlockEntities.IMPULSE_HOPPER))
+        .properties(props -> props.strength(2.5f, 8))
+        .loot(MachinesLootTable::copyNBT)
         .item()
         .tab(() -> EIOCreativeTabs.MACHINES)
         .build()

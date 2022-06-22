@@ -1,10 +1,13 @@
 package com.enderio.machines.common.menu;
 
+
+import org.jetbrains.annotations.NotNull;
+
 import com.enderio.machines.common.io.item.MachineInventory;
+
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.SlotItemHandler;
-import org.jetbrains.annotations.NotNull;
 
 public class MachineSlot extends SlotItemHandler {
 
